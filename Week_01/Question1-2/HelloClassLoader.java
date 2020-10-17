@@ -26,7 +26,7 @@ public class HelloClassLoader extends ClassLoader {
     }
 
     private byte[] loadBytes() {
-        String name = "/Users/mac/IdeaProjects/GeekTime-Java/JAVA-000/src/main/resources/Hello.xlass";
+        String name = this.getClass().getResource("/Hello.xlass").getPath();
         try {
             RandomAccessFile raf = new RandomAccessFile(name, "r");
             byte[] bytes = new byte[(int) raf.length()];

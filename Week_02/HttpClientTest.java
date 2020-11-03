@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 /**
- * @author mac
+ * @author mac 
  */
 public class HttpClientTest {
     private static final Logger logger = LogManager.getLogger(HttpClientTest.class);

@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    master: # 主机
+      jdbc-url: jdbc:mysql://localhost:3340/db1?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
+    slave: # 从机
+      jdbc-url: jdbc:mysql://localhost:3339/db1?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456

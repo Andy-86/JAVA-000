@@ -1,0 +1,15 @@
+server:
+  port: 8082
+#  禁止自动化配置
+spring:
+  shardingsphere:
+    enabled: false
+  datasource:
+    master: # 主机
+      jdbc-url: jdbc:mysql://localhost:3340/db1?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
+    slave: # 从机
+      jdbc-url: jdbc:mysql://localhost:3339/db1?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.andy.shardingjdbc.user.dao.StoreOrderMapper">
+  <resultMap id="BaseResultMap" type="com.andy.shardingjdbc.user.model.StoreOrder">
+    <!--@mbg.generated-->
+    <!--@Table store_order-->
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="shipping_address" jdbcType="VARCHAR" property="shippingAddress" />
+    <result column="reciving_phone" jdbcType="CHAR" property="recivingPhone" />
+    <result column="order_amount" jdbcType="REAL" property="orderAmount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_id, create_time, update_time, commodity_id, user_id, shipping_address, reciving_phone, 
+    order_amount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from store_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from store_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="com.andy.shardingjdbc.user.model.StoreOrder" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into store_order (order_id,create_time, update_time, commodity_id,
+      user_id, shipping_address, reciving_phone, 
+      order_amount)
+    values (#{orderId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{commodityId,jdbcType=BIGINT},
+      #{userId,jdbcType=BIGINT}, #{shippingAddress,jdbcType=VARCHAR}, #{recivingPhone,jdbcType=CHAR}, 
+      #{orderAmount,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" keyColumn="order_id" keyProperty="orderId" parameterType="com.andy.shardingjdbc.user.model.StoreOrder" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into store_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="shippingAddress != null">
+        shipping_address,
+      </if>
+      <if test="recivingPhone != null">
+        reciving_phone,
+      </if>
+      <if test="orderAmount != null">
+        order_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shippingAddress != null">
+        #{shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recivingPhone != null">
+        #{recivingPhone,jdbcType=CHAR},
+      </if>
+      <if test="orderAmount != null">
+        #{orderAmount,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.andy.shardingjdbc.user.model.StoreOrder">
+    <!--@mbg.generated-->
+    update store_order
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shippingAddress != null">
+        shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recivingPhone != null">
+        reciving_phone = #{recivingPhone,jdbcType=CHAR},
+      </if>
+      <if test="orderAmount != null">
+        order_amount = #{orderAmount,jdbcType=REAL},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.andy.shardingjdbc.user.model.StoreOrder">
+    <!--@mbg.generated-->
+    update store_order
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      commodity_id = #{commodityId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+      reciving_phone = #{recivingPhone,jdbcType=CHAR},
+      order_amount = #{orderAmount,jdbcType=REAL}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+</mapper>

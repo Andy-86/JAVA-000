@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.exampale.andy.hmily.consumer.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="org.example.alex.hmily.api.model.Account">
+        <!--@mbg.generated-->
+        <!--@Table account-->
+        <id column="seq_id" jdbcType="INTEGER" property="seqId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="usd_amount" jdbcType="DECIMAL" property="usdAmount"/>
+        <result column="chn_amount" jdbcType="DECIMAL" property="chnAmount"/>
+        <result column="froze_usd" jdbcType="DECIMAL" property="frozeUsd"/>
+        <result column="froze_chn" jdbcType="DECIMAL" property="frozeChn"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        seq_id, user_id, usd_amount, chn_amount, froze_usd, froze_chn
+    </sql>
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from account
+        where seq_id = #{seqId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="seq_id" keyProperty="seqId"
+            parameterType="org.example.alex.hmily.api.model.Account" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into account (user_id, usd_amount, chn_amount,
+        froze_usd, froze_chn)
+        values (#{userId,jdbcType=INTEGER}, #{usdAmount,jdbcType=DECIMAL}, #{chnAmount,jdbcType=DECIMAL},
+        #{frozeUsd,jdbcType=DECIMAL}, #{frozeChn,jdbcType=DECIMAL})
+    </insert>
+    <insert id="insertSelective" keyColumn="seq_id" keyProperty="seqId"
+            parameterType="org.example.alex.hmily.api.model.Account" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="usdAmount != null">
+                usd_amount,
+            </if>
+            <if test="chnAmount != null">
+                chn_amount,
+            </if>
+            <if test="frozeUsd != null">
+                froze_usd,
+            </if>
+            <if test="frozeChn != null">
+                froze_chn,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="usdAmount != null">
+                #{usdAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="chnAmount != null">
+                #{chnAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="frozeUsd != null">
+                #{frozeUsd,jdbcType=DECIMAL},
+            </if>
+            <if test="frozeChn != null">
+                #{frozeChn,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.example.alex.hmily.api.model.Account">
+        <!--@mbg.generated-->
+        update account
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="usdAmount != null">
+                usd_amount = #{usdAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="chnAmount != null">
+                chn_amount = #{chnAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="frozeUsd != null">
+                froze_usd = #{frozeUsd,jdbcType=DECIMAL},
+            </if>
+            <if test="frozeChn != null">
+                froze_chn = #{frozeChn,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where seq_id = #{seqId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByUserId" parameterType="org.example.alex.hmily.api.model.Account">
+        <!--@mbg.generated-->
+        update account
+        usd_amount = #{usdAmount,jdbcType=DECIMAL},
+        chn_amount = #{chnAmount,jdbcType=DECIMAL},
+        froze_usd = #{frozeUsd,jdbcType=DECIMAL},
+        froze_chn = #{frozeChn,jdbcType=DECIMAL}
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="frozeUDS">
+        update account set usd_amount = usd_amount - #{dto.amount} and froze_usd = froze_usd + #{dto.amount}
+        where user_id = #{dto.userId} and usd_amount > #{dto.amount}
+    </update>
+    <update id="frozeCHN">
+        update account set chn_amount = chn_amount - #{dto.amount} and froze_chn = froze_chn + #{dto.amount}
+        where user_id = #{dto.userId} and chn_amount > #{dto.amount}
+    </update>
+</mapper>
